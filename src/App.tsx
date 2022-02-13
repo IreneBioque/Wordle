@@ -1,11 +1,9 @@
 import React from 'react';
-
+import Wordle from './components/wordle';
 
 function App() {
   return (
-    <div className="App">
-      Hola mundo
-    </div>
+   <Wordle />
   );
 }
 
