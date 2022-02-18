@@ -1,6 +1,6 @@
 import Box from './box';
 import { BoxStatus } from './types';
-
+import styles from "./row.module.scss"
 interface RowCompletedProps{
     word: string;
     solution: string;
@@ -21,7 +21,7 @@ export default function RowCompleted({ word, solution }: RowCompletedProps) {
   }
 
     return (
-        <div>
+        <div className={styles.row}>
             {Array.from(Array(5)).map((_, i) => (
                 <Box key={i} value={word[i]} status={checkLetter(word[i], i)}/>
             ))}
