@@ -116,7 +116,7 @@ export default function Wordle() {
     }, []);
   return (
     <>
-      <h1 className={styles.title}>WORDLE</h1>
+      <h1 className={styles.title}>WORDL<span  className={styles.span}>E</span></h1>
         <div className={styles.main}>
             {
                 gameStatus === GameStatus.Won ? (

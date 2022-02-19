@@ -1,5 +1,5 @@
 import styles from "./modal.module.scss";
-
+import { Link } from 'react-router-dom';
 interface ModalProps {
   type: "won" | "lost";
   completedWords: string[];
@@ -37,7 +37,6 @@ export default function Modal({ type, completedWords, solution }: ModalProps) {
     <div className={styles.modalViewContainer}>
       <div className={styles.modalContainer}>
         <h2>You {type === "won" ? "won!" : "lost"}</h2>
-
         <div className={styles.puzzle}>
           {completedWords.map((word, i) => (
             <Square key={i} word={word} solution={solution} />
