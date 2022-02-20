@@ -4,7 +4,6 @@
   border: none;
   border-radius: 3px;
   color: white;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,41 +15,32 @@
   width: 650px;
   margin: 0 auto;
   gap: 5px;
+  margin: auto;
+  flex-direction: column;
+}
+.keyboardRow {
+  display: flex;
+  justify-content: center;
 }
 .key {
   @include keybase;
-  width: 50px;
-  height: 70px;
+  width: 30px;
+  height: 60px;
+  margin: 2px;
 }
-.emptyKey {
-  width: 65px;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.emptyKeySmall {
-  width: 40px;
-  height: 70px;
-
-}
-.emptyKeySmaller {
-  width: 20px;
-  height: 70px;
-
-}
-
 
 .enterKey {
   @include keybase;
-  width: 80px;
-  height: 70px;
+  width: 70px;
+  height: 60px;
+  margin: 2px 5px;
 }
 
 .deleteKey {
   @include keybase;
-  width: 80px;
-  height: 70px;
+  width: 30px;
+  height: 60px;
+    margin: 2px 5px;
 }
 
 .correct {
@@ -69,4 +59,23 @@
   background-color: #aaa;
   border: #aaa solid 2px;
   color: black;
+}
+
+@media (min-width: 768px) {
+  .key {
+    @include keybase;
+    width: 50px;
+    height: 70px;
+  }
+  .enterKey {
+    @include keybase;
+    width: 80px;
+    height: 70px;
+  }
+
+  .deleteKey {
+    @include keybase;
+    width: 80px;
+    height: 70px;
+  }
 }

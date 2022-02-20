@@ -1,5 +1,5 @@
 import styles from "./keyboard.module.scss";
-
+import {RiDeleteBack2Line} from "react-icons/ri";
 interface KeyboardProps {
   keys: string[];
   onKeyPressed: (key: string) => void;
@@ -19,35 +19,35 @@ export default function Keyboard({ keys, onKeyPressed }: KeyboardProps) {
   }
 
   return (
-      <div className={styles.keyboardContainer}>
-           <div className={styles.emptyKeySmall}></div>
+    <div className={styles.keyboardContainer}>
+      <div className={styles.keyboardRow}>
       {Array.from(Array(10)).map((_, i) => (
         <button key={i} className={styles.key} onClick={handleInput}>
           {keys[i]}
         </button>
       ))}
-    
-          <div className={styles.emptyKey}></div>
+      </div>
+            <div className={styles.keyboardRow}>
       {Array.from(Array(9)).map((_, i) => (
         <button key={i + 10} className={styles.key} onClick={handleInput}>
           {keys[i + 10]}
         </button>
       ))}
-          <div className={styles.emptyKey}></div>
-          <div className={styles.emptyKeySmaller}></div>
-      <button className={styles.enterKey} onClick={handleEnter}>
+        </div>
+      <div className={styles.keyboardRow}>
+              <button className={styles.enterKey} onClick={handleEnter}>
         ENTER
-          </button>
-          
+        </button>
       {Array.from(Array(8)).map((_, i) => (
         <button key={i + 19} className={styles.key} onClick={handleInput}>
           {keys[i + 19]}
         </button>
       ))}
   
-      <button className={styles.deleteKey} onClick={handleDelete}>
-        DELETE
-      </button>
+        <button className={styles.deleteKey} onClick={handleDelete}>
+          <RiDeleteBack2Line/>
+        </button>
+        </div>
     </div>
   );
 }
