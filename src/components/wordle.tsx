@@ -2,13 +2,19 @@
 import { useEffect, useState } from 'react';
 import RowCompleted from './rowCompleted';
 import RowEmpty from './rowEmpty';
-import { GameStatus } from './types';
+import { GameStatus, KeyStatus } from './types';
 import { useWindow } from '../hooks/useWindow';
 import RowCurrent from './row-current';
 import { getWordOfTheDay, isValidWord } from '../services/request';
 import styles from "./wordle.module.scss"
 import Keyboard from './keyboard';
 import Modal from './modal';
+
+export interface BoardKey {
+  value: string;
+  status: KeyStatus;
+}
+
 export default function Wordle() {
     const [wordOfTheDay, setWordOfTheDay] = useState<string>("");
     const [turn, setTurn] = useState<number>(1);
@@ -43,7 +49,38 @@ export default function Wordle() {
   "B",
   "N",
   "M",
-    ];
+  ];
+  
+  const [keysStates, setKeysStates] = useState<BoardKey[]>([
+    { value: "Q", status: "unknown" },
+    { value: "W", status: "unknown" },
+    { value: "E", status: "unknown" },
+    { value: "R", status: "unknown" },
+    { value: "T", status: "unknown" },
+    { value: "Y", status: "unknown" },
+    { value: "U", status: "unknown" },
+    { value: "I", status: "unknown" },
+    { value: "O", status: "unknown" },
+    { value: "P", status: "unknown" },
+    { value: "A", status: "unknown" },
+    { value: "S", status: "unknown" },
+    { value: "D", status: "unknown" },
+    { value: "F", status: "unknown" },
+    { value: "G", status: "unknown" },
+    { value: "H", status: "unknown" },
+    { value: "J", status: "unknown" },
+    { value: "K", status: "unknown" },
+    { value: "L", status: "unknown" },
+    { value: "Ñ", status: "unknown" },
+    { value: "Z", status: "unknown" },
+    { value: "X", status: "unknown" },
+    { value: "C", status: "unknown" },
+    { value: "V", status: "unknown" },
+    { value: "B", status: "unknown" },
+    { value: "N", status: "unknown" },
+    { value: "M", status: "unknown" },
+  ]);
+
      function onKeyPressed(key: string) {
     if (gameStatus !== GameStatus.Playing) {
       return;
@@ -96,8 +133,6 @@ export default function Wordle() {
       alert("Not a valid word");
       return;
     }
-
-
         setCompletedWords([...completedWords, currentWord]);
         setTurn(turn + 1);
         setCurrentWord("");
@@ -107,11 +142,38 @@ export default function Wordle() {
         if (gameStatus !== GameStatus.Playing) {
             return;
         }
-
     onKeyPressed(key);
   }
-    useWindow("keydown", handleKeyDown);
+  useWindow("keydown", handleKeyDown);
+  
+    function checkLetter(letter: string, pos: number): void {
+    if (wordOfTheDay.includes(letter)) {
+      if (wordOfTheDay[pos] === letter) {
+        findLetterKeyboard(letter, "correct");
+      } else {
+        findLetterKeyboard(letter, "present");
+      }
+    } else {
+      findLetterKeyboard(letter, "absent");
+    }
+  }
+  function findLetterKeyboard(letter: string, status: KeyStatus) {
+    let index = keysStates.findIndex((key) => {
+      return key.value === letter;
+    });
+    const aux = keysStates;
+    aux[index].status = status;
+    setKeysStates(aux);
+  }  
     useEffect(() => {
+    function colorKeys(word: string): void {
+      word.split("").map((letter, i) => checkLetter(letter, i));
+    }
+    if (completedWords.length > 0) {
+      colorKeys(completedWords[completedWords.length - 1]);
+    }
+    });
+      useEffect(() => {
         setWordOfTheDay(getWordOfTheDay());
     }, []);
   return (
@@ -152,7 +214,7 @@ export default function Wordle() {
             }  
             
             </div>
-            <Keyboard keys={keys} onKeyPressed={onKeyPressed} />
+            <Keyboard keys={keys} onKeyPressed={onKeyPressed} keysStates={keysStates} />
       </div>
       </>
     )

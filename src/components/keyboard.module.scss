@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
 }
-.key {
+@mixin key {
   @include keybase;
   width: 30px;
   height: 60px;
@@ -40,29 +40,30 @@
   @include keybase;
   width: 30px;
   height: 60px;
-    margin: 2px 3px;
+  margin: 2px 3px;
 }
-
-.correct {
-  background-color: #4caf50;
-  border: #4caf50 solid 2px;
-  color: black;
+.unknown {
+  @include key;
 }
-
-.present {
-  background-color: #e5f321;
-  border: #e5f321 solid 2px;
-  color: black;
-}
-
 .absent {
+  @include key;
   background-color: #aaa;
   border: #aaa solid 2px;
   color: black;
 }
+.correct_key {
+  @include key();
+  background-color: #4caf50;
+  border: #4caf50 solid 2px;
+}
 
+.present_key {
+  @include key();
+  background-color: #e5f321;
+  border: #e5f321 solid 2px;
+}
 @media (min-width: 768px) {
-  .key {
+  @mixin key {
     @include keybase;
     width: 50px;
     height: 70px;
@@ -77,5 +78,25 @@
     @include keybase;
     width: 80px;
     height: 70px;
+  }
+  .absent {
+    @include key;
+    background-color: #aaa;
+    border: #aaa solid 2px;
+    color: black;
+  }
+  .unknown {
+    @include key;
+  }
+  .correct_key {
+    @include key();
+    background-color: #4caf50;
+    border: #4caf50 solid 2px;
+  }
+
+  .present_key {
+    @include key();
+    background-color: #e5f321;
+    border: #e5f321 solid 2px;
   }
 }

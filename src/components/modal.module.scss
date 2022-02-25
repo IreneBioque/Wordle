@@ -40,3 +40,8 @@
   display: flex;
   gap: 3px;
 }
+@media (max-width: 500px){
+.modalContainer {
+  width: 400px;
+  }
+}
