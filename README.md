@@ -8,8 +8,6 @@ This is my version of Wordle made following the tutorial of [Vidammr](https://ww
 The way it works is simple, every day you will have to guess a new word in English. You will have 6 tries to get it right. You will get the letters that are correct, that are not in the word and the letters that contain the word, that are not in the correct position. 
 I hope you enjoy it! 🙂 
 
-Translated with www.DeepL.com/Translator (free version)
-
 ## Comenzando 🚀 / Starting 🚀
 
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
